@@ -10,15 +10,15 @@ Because of unencrypted HTTP request that come from Ruijie Reyee Cloud based Devi
 Once the attacker have gained access, they can execute arbitrary commands on the system or application, potentially compromising sensitive data, installing malware, or taking control of the system.
 
 ### Original CWMP Sequence
-![[images/cwmp-sequence-normal.drawio.png]]
+![](images/cwmp-sequence-normal.drawio.png)
 
 ### MiTM CWMP Sequence
-![[images/cwmp-sequence-mitm.drawio.png]]
+![](images/cwmp-sequence-mitm.drawio.png)
 
 ### MiTM Flow Topology
-![[images/cwmp-sequence-mitm-dnsspoof.drawio.png]]
-![[images/cwmp-sequence-mitm-ipspoof.drawio.png]]
-![[images/cwmp-sequence-mitm-ipspoof-redirectpacket.drawio.png]]
+![](images/cwmp-sequence-mitm-dnsspoof.drawio.png)
+![](images/cwmp-sequence-mitm-ipspoof.drawio.png)
+![](images/cwmp-sequence-mitm-ipspoof-redirectpacket.drawio.png)
 
 ## Steps to reproduce/PoC
 This step to reproduce/PoC using home router (EW1200G-PRO) as target, and python script to serve fake CWMP response that send command injection payload while the target device is communicating to CWMP server.
@@ -31,17 +31,17 @@ This step to reproduce/PoC using home router (EW1200G-PRO) as target, and python
 
 #### Step 1 - Running MiTM Scenario
 Connect the ruijie cloud based device to the network that will forward packets from the IP address of A/AAAA record domain cwmpb-as.ruijienetworks.com (depending on cwmp server that have been configured on the device) to the IP address of the MiTM server
-![[images/cwmp-sequence-mitm-dnsspoof.drawio.png]]
+![](images/cwmp-sequence-mitm-dnsspoof.drawio.png)
 
 #### Step 2 - Deploying Fake CWMP Server
 Run ruijie-fake-cwmp-server.py to serve fake CWMP that will communicating with target device to gather information about the device and send arbitrary OS command to be executed.
 
 On this screenshot the fake CWMP server is sending `uname -a` to be executed on target device
-![[images/ruijie-mitm-rce-exploit-script.png]]
+![](images/ruijie-mitm-rce-exploit-script.png)
 
 #### Step 3 - Command Injected on Device
 The python script will display information about target device and display response of arbitrary OS command that is successfully executed on target device.
-![[images/ruijie-mitm-rce-exploit.png]]
+![](images/ruijie-mitm-rce-exploit.png)
 
 ### Impact
 Attacker that have same network access of Ruijie Reyee Cloud based Device can exploit these vulnerabilities to execute arbitrary code on the Ruijie Reyee Cloud based Device, allowing them to gain control over the device, intercept and modify network traffic, or launch further attacks on other devices on the network. RCE vulnerabilities in router devices can have a significant impact on users, as attackers can gain access to sensitive information, such as passwords, financial data, and personal information. They can also use the compromised router to launch further attacks on other devices on the network, such as computers and smartphones, potentially compromising even more sensitive information.
